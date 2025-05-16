@@ -32,7 +32,8 @@ class WebServerPRODERJ extends BaseController
         }
     }
 
-    public function consultar(){
+    public function consultar()
+    {
         return false;
     }
 
