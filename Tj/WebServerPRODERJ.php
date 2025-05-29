@@ -10,7 +10,8 @@ class WebServerPRODERJ extends BaseController
 {
     private $wsdl = DF91D46565E134051360E71BA159FC27;
     private $sLogin = B7143D3E16D4766A7EF9D0AFFC9E5F45;
-    private $sSenha = C8C21309118B00E6FEF638E6892AB505;
+    // private $sSenha = C8C21309118B00E6FEF638E6892AB505;
+    private $sSenha = 'WKEA23';
     private $sMachine = B344A643309594F2858CD63F852076B8;
     private $sUsuarioSO = C1551D0BB5DE75540595F9B51136D5BF;
     private $sSiglaSist = C4104D6833717E7AD62E2D43B1FE08CC;
@@ -52,13 +53,17 @@ class WebServerPRODERJ extends BaseController
                 'codOrg' => intval($this->codOrg),
                 'sUsuarioLog' => $this->sUsuarioLog
             ];
+            
+            myPrint('$params :: ', $params);
 
             $result = $this->client->RegistrarSistema($params);
+            myPrint('$result :: ', $result);
             log_message('info', 'Sistema registrado com sucesso no PRODERJ');
             return $result;
 
         } catch (SoapFault $e) {
             log_message('error', 'Erro ao registrar sistema: ' . $e->getMessage());
+            myPrint('$e->getMessage() ::', $e->getMessage());
             throw $e;
         }
     }
@@ -96,7 +101,19 @@ class WebServerPRODERJ extends BaseController
     # route GET /www/index.php/novo/webserviceproderj/api/consultar/(:any)
     public function consultarProcesso($numeroProcesso = null)
     {
-
+        // echo "<br/>" . $this->wsdl;
+        // echo "<br/>" . $this->sLogin;
+        // echo "<br/>" . $this->sSenha;
+        // echo "<br/>" . $this->sMachine;
+        // echo "<br/>" . $this->sUsuarioSO;
+        // echo "<br/>" . $this->sSiglaSist;
+        // echo "<br/>" . $this->codOrg;
+        // echo "<br/>" . $this->sUsuarioLog;
+        // echo "<br/>";
+        // echo "<br/>";
+        // echo "<br/>";
+        // echo "<br/>";
+        // exit('FIM');
         if ($numeroProcesso === null) {
             return $this->response->setJSON([
                 'status' => 400,
