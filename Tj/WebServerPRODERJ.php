@@ -54,16 +54,16 @@ class WebServerPRODERJ extends BaseController
                 'sUsuarioLog' => $this->sUsuarioLog
             ];
             
-            myPrint('$params :: ', $params);
+            // myPrint('$params :: ', $params);
 
             $result = $this->client->RegistrarSistema($params);
-            myPrint('$result :: ', $result);
+            // myPrint('$result :: ', $result);
             log_message('info', 'Sistema registrado com sucesso no PRODERJ');
             return $result;
 
         } catch (SoapFault $e) {
             log_message('error', 'Erro ao registrar sistema: ' . $e->getMessage());
-            myPrint('$e->getMessage() ::', $e->getMessage());
+            // myPrint('$e->getMessage() ::', $e->getMessage());
             throw $e;
         }
     }
