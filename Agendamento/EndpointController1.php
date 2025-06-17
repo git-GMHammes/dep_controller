@@ -58,12 +58,13 @@ class EndpointController1 extends ResourceController
     }
 
     # Consumo de API
-    # route GET /www/novo/agendamento/endpoint/agendarrecebimento/(:any)
-    # route POST /www/novo/agendamento/endpoint/agendarrecebimento/(:any)
+    # route GET /www/novo/(:any)
+    # route POST /www/novo/(:any)
     # Informação sobre o controller
     # retorno do controller [VIEW]
     public function dbCreate($parameter = NULL)
     {
+        exit('403 Forbidden - Pagina ainda não construida.');
         // $this->token_csrf();
         $request = service('request');
         $getMethod = $request->getMethod();
@@ -161,12 +162,13 @@ class EndpointController1 extends ResourceController
     }
 
     # Consumo de API
-    # route GET /www/novo/agendamento/endpoint/agendarrecebimentoplus/(:any)
-    # route POST /www/novo/agendamento/endpoint/agendarrecebimentoplus/(:any)
+    # route GET /www/(:any)
+    # route POST /www/(:any)
     # Informação sobre o controller
     # retorno do controller [VIEW]
     public function dbCreatePlus($parameter = NULL)
     {
+        exit('403 Forbidden - Ainda não construido.');
         // $this->token_csrf();
         $request = service('request');
         $getMethod = $request->getMethod();

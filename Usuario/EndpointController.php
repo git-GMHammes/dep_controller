@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Controllers\Agendamento;
+namespace App\Controllers\Usuario;
 
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 use App\Controllers\Pattern\TokenCsrfController;
-use App\Controllers\Pattern\MessageController;
-use App\Controllers\Pattern\SBaseController;
 
 use Exception;
 
@@ -112,8 +110,8 @@ class EndpointController extends ResourceController
         return $loadView;
     }
 
-    # route POST /www/index.php/project/method
-    # route GET /www/index.php/project/method
+    # route POST /www/sigla/rota
+    # route GET /www/sigla/rota
     # Informação sobre o controller
     # retorno do controller [view]
     public function index()
@@ -121,17 +119,28 @@ class EndpointController extends ResourceController
         exit('403 Forbidden - Directory access is forbidden.');
     }
 
-    # route POST /www/index.php/project/method
-    # route GET /www/index.php/project/method
+    # route POST /www/index.php/novo/usuario/endpoint/exibir/(:any)
+    # route GET /www/index.php/novo/usuario/endpoint/exibir/(:any)
     # Informação sobre o controller
     # retorno do controller [view]
     public function dbRead()
     {
-        exit('403 Forbidden - Directory access is forbidden.');
+        // C:\laragon\www\novo\src\app\Controllers\Usuario\EndpointController.php
+        // Pegue os dados da sessão
+        $varSession = (session()->get('gov_br')) ? (session()->get('gov_br')) : (array());
+    
+        // Configurar cabeçalhos CORS
+        $this->response->setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:45300');
+        $this->response->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+        $this->response->setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With');
+        $this->response->setHeader('Access-Control-Allow-Credentials', 'true');
+        
+        // Responder com JSON
+        return $this->response->setJSON($varSession);
     }
 
-    # route POST /www/index.php/project/method
-    # route GET /www/index.php/project/method
+    # route POST /www/sigla/rota
+    # route GET /www/sigla/rota
     # Informação sobre o controller
     # retorno do controller [view]
     public function dbFilter()
@@ -139,54 +148,17 @@ class EndpointController extends ResourceController
         exit('403 Forbidden - Directory access is forbidden.');
     }
 
-    # Consumo de API
-    # route POST /www/index.php/novo/agendamento/endpoint/agendarrecebimento/(:any)
-    # route GET /www/index.php/novo/agendamento/endpoint/agendarrecebimento/(:any)
+    # route POST /www/sigla/rota
+    # route GET /www/sigla/rota
     # Informação sobre o controller
-    # retorno do controller [VIEW]
-    public function dbCreate($parameter = NULL)
+    # retorno do controller [view]
+    public function dbCreate()
     {
-        $request = service('request');
-        $getMethod = $request->getMethod();
-        $pageGet = $this->request->getGet('page');
-        $limit = (isset($limitGet) && !empty($limitGet)) ? ($limitGet) : (10);
-        $processRequest = (array) $request->getVar();
-        $json = isset($processRequest['json']) && $processRequest['json'] == 1 ? 1 : 0;
-        $id = (isset($processRequest['id'])) ? ('/' . $processRequest['id']) : ('/' . $parameter);
-        $page = (isset($pageGet) && !empty($pageGet)) ? ($pageGet) : (1);
-        $limitGet = $this->request->getGet('limit');
-        $this->tokenCsrf->token_csrf();
-        #
-        $loadView = $this->setView(
-            [
-                'novodeposito/agendamento/main.php',
-            ]
-        );
-        #
-        #
-        try {
-            $requestJSONform = $this->setRequestJSONform($id, $page, $limit);
-            $apiRespond = $this->setAQpiRespond('success', '', $requestJSONform, $loadView, $getMethod);
-            if ($json == 1) {
-                $response = $this->response->setStatusCode(201)->setJSON($apiRespond);
-            }
-        } catch (\Exception $e) {
-            $apiRespond = $this->setAQpiRespond('error', $e->getMessage(), $requestJSONform, $loadView, $getMethod);
-            if ($json == 1) {
-                $response = $this->response->setStatusCode(500)->setJSON($apiRespond);
-            }
-        }
-        if ($json == 1) {
-            return $response;
-        } else {
-            return view('novodeposito/agendamento/main', $apiRespond);
-        }
+        exit('403 Forbidden - Directory access is forbidden.');
     }
 
-
-
-    # route POST /www/index.php/project/method
-    # route GET /www/index.php/project/method
+    # route POST /www/sigla/rota
+    # route GET /www/sigla/rota
     # Informação sobre o controller
     # retorno do controller [view]
     public function dbUpdate()
@@ -194,8 +166,8 @@ class EndpointController extends ResourceController
         exit('403 Forbidden - Directory access is forbidden.');
     }
 
-    # route POST /www/index.php/project/method
-    # route GET /www/index.php/project/method
+    # route POST /www/sigla/rota
+    # route GET /www/sigla/rota
     # Informação sobre o controller
     # retorno do controller [view]
     public function dbDelete()
@@ -203,8 +175,8 @@ class EndpointController extends ResourceController
         exit('403 Forbidden - Directory access is forbidden.');
     }
 
-    # route POST /www/index.php/project/method
-    # route GET /www/index.php/project/method
+    # route POST /www/sigla/rota
+    # route GET /www/sigla/rota
     # Informação sobre o controller
     # retorno do controller [view]
     public function dbCleanner()
