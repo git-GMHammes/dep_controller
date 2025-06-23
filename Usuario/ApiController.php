@@ -338,12 +338,13 @@ class ApiController extends ResourceController
         return $this->response->setStatusCode(403)->setJSON($apiRespond);
     }
 
-    # route POST /www/index.php/novo/usuario/api/teste/(:any)
-    # route GET /www/index.php/novo/usuario/api/teste/(:any)
+    # route POST /www/index.php/novo/usuario/api/off/(:any)
+    # route GET /www/index.php/novo/usuario/api/off/(:any)
     # Informação sobre o controller
     # retorno do controller [JSON]
-    public function testeUsuario($parameter = NULL)
+    public function offLine($parameter = NULL)
     {
+
         $gov_br = array(
             'nome' => 'Caio Marinhoi',
             'email' => 'teste@rteste.com.br',
@@ -362,7 +363,7 @@ class ApiController extends ResourceController
 
         $apiRespond = array(
             'name_session' => 'gov_br',
-            'time_in_seconds' => 60*5,
+            'time_in_seconds' => 60 * 5,
             'gov_br' => $gov_br,
         );
 
@@ -378,8 +379,8 @@ class ApiController extends ResourceController
         // Definir o cookie com o conteúdo JSON
         $cookieOptions = [
             'name' => 'gov_br_data',
-            'value' => $jsonData,  // Usar a string JSON aqui
-            'expire' => 3600,
+            'value' => $jsonData,
+            'expire' => 60*5,
             'path' => '/',
             'domain' => '',
             'secure' => false,
@@ -388,10 +389,33 @@ class ApiController extends ResourceController
         ];
 
         // Usar setcookie() da classe Response
+        if (!$this->response) {
+            $this->response = service('response');
+        }
         $this->response->setCookie($cookieOptions);
 
         // Retornar a resposta JSON
-        return $this->response->setStatusCode(201)->setJSON($montaJSON);
+        $applyReturnInFunction = $this->uri->getSegments();
+        if (
+            in_array(
+                'novo',
+                $applyReturnInFunction
+            )
+            && in_array(
+                'usuario',
+                $applyReturnInFunction
+            )
+            && in_array(
+                'api',
+                $applyReturnInFunction
+            )
+            && in_array(
+                'off',
+                $applyReturnInFunction
+            )
+        ) {
+            return $this->response->setStatusCode(201)->setJSON($montaJSON);
+        }
     }
 }
 #
