@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class Main extends BaseController
+class MainBase2025 extends BaseController
 {
     public function index()
     {
