@@ -182,7 +182,7 @@ class EndpointController extends ResourceController
     {
         
         // Configurar cabeçalhos CORS
-        $this->response->setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:45300');
+        $this->response->setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:65200');
         $this->response->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
         $this->response->setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With');
         $this->response->setHeader('Access-Control-Allow-Credentials', 'true');
